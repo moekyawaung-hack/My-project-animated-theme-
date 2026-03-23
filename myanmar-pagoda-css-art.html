@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏯 Myanmar Golden Pagoda — CSS Art</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Myanmar:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+
+/* =============================================
+   ROOT & RESET
+   ============================================= */
+:root {
+  --sky-top: #0d0622;
+  --sky-mid: #1a1040;
+  --sky-hor: #6b2d0e;
+  --sun-core: #FFD700;
+  --sun-glow: #FF8C00;
+  --gold: #FFD700;
+  --gold-deep: #B8860B;
+  --gold-dark: #7a5c00;
+  --pagoda: #c9960a;
+  --pagoda-dark: #7a5a00;
+  --pagoda-shadow: #3d2c00;
+  --water: #0a1628;
+  --water-reflect: rgba(255,180,0,0.15);
+  --tree-dark: #1a3a0a;
+  --tree-mid: #2d5c16;
+  --moon: #fff8e1;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--sky-top);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  font-family: 'Playfair Display', serif;
+}
+
+/* =============================================
+   SCENE WRAPPER
+   ============================================= */
+.scene {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  aspect-ratio: 7/5;
+  overflow: hidden;
+  box-shadow: 0 0 80px rgba(255, 140, 0, 0.2);
+}
+
+/* =============================================
+   SKY
+   ============================================= */
+.sky {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 45%,
+    #8B3A00 0%,
+    #4a1a00 25%,
+    #1a1040 55%,
+    #0d0622 100%);
+  animation: skyPulse 8s ease-in-out infinite alternate;
+}
+@keyframes skyPulse {
+  0%  { filter: brightness(0.9); }
+  100%{ filter: brightness(1.05); }
+}
+
+/* Stars */
+.stars {
+  position: absolute;
+  inset: 0;
+}
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle ease-in-out infinite alternate;
+}
+@keyframes twinkle {
+  0%  { opacity: 0.2; transform: scale(0.8); }
+  100%{ opacity: 1;   transform: scale(1.2); }
+}
+
+/* Moon */
+.moon {
+  position: absolute;
+  top: 8%;
+  right: 12%;
+  width: 40px;
+  height: 40px;
+  background: var(--moon);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255,248,225,0.6), 0 0 50px rgba(255,248,225,0.2);
+  animation: moonGlow 5s ease-in-out infinite alternate;
+}
+.moon::before {
+  content: '';
+  position: absolute;
+  top: 2px; right: 6px;
+  width: 30px; height: 30px;
+  background: #1a1040;
+  border-radius: 50%;
+}
+@keyframes moonGlow {
+  0%  { box-shadow: 0 0 16px rgba(255,248,225,0.5), 0 0 40px rgba(255,248,225,0.15); }
+  100%{ box-shadow: 0 0 28px rgba(255,248,225,0.8), 0 0 70px rgba(255,248,225,0.3); }
+}
+
+/* Horizon glow */
+.horizon-glow {
+  position: absolute;
+  bottom: 38%;
+  left: 0; right: 0;
+  height: 25%;
+  background: radial-gradient(ellipse 80% 100% at 50% 100%,
+    rgba(255,100,0,0.35) 0%,
+    rgba(180,50,0,0.15) 50%,
+    transparent 100%);
+  animation: horizonPulse 6s ease-in-out infinite alternate;
+}
+@keyframes horizonPulse {
+  0%  { opacity: 0.7; }
+  100%{ opacity: 1; }
+}
+
+/* =============================================
+   DISTANT HILLS
+   ============================================= */
+.hills {
+  position: absolute;
+  bottom: 37%;
+  left: 0; right: 0;
+  height: 20%;
+}
+.hill {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50% 50% 0 0;
+  background: #12082a;
+}
+.hill-1 { width: 55%; height: 90%; left: -5%; }
+.hill-2 { width: 50%; height: 100%; left: 35%; background: #0d0620; }
+.hill-3 { width: 35%; height: 75%; left: 70%; }
+.hill-4 { width: 40%; height: 60%; left: -15%; background: #0f0720; }
+
+/* =============================================
+   GROUND PLATFORM
+   ============================================= */
+.ground {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, #1a0e00 0%, #0a0800 100%);
+  border-top: 2px solid rgba(180, 120, 0, 0.3);
+}
+
+/* =============================================
+   WATER / REFLECTION
+   ============================================= */
+.water {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  height: 22%;
+  background: linear-gradient(180deg,
+    rgba(20,10,0,0.95) 0%,
+    #06080f 60%,
+    #050708 100%);
+  overflow: hidden;
+}
+.water-shimmer {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100%;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(180,100,0,0.06) 3px,
+    rgba(180,100,0,0.06) 4px
+  );
+}
+.water-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 100%;
+  background: radial-gradient(ellipse 100% 40% at 50% 0%,
+    rgba(255, 150, 0, 0.15) 0%,
+    transparent 100%);
+  animation: waterGlow 4s ease-in-out infinite alternate;
+}
+@keyframes waterGlow {
+  0%  { opacity: 0.6; }
+  100%{ opacity: 1; }
+}
+
+/* Ripple lines */
+.ripple {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1px;
+  background: rgba(255, 160, 0, 0.25);
+  border-radius: 50%;
+  animation: rippleAnim linear infinite;
+}
+.ripple-1 { width: 120px; top: 15%; animation-duration: 3s; animation-delay: 0s; }
+.ripple-2 { width: 80px;  top: 35%; animation-duration: 3.5s; animation-delay: 0.8s; }
+.ripple-3 { width: 150px; top: 55%; animation-duration: 4s; animation-delay: 1.5s; }
+.ripple-4 { width: 60px;  top: 72%; animation-duration: 2.8s; animation-delay: 0.3s; }
+@keyframes rippleAnim {
+  0%   { transform: translateX(-50%) scaleX(0.8); opacity: 0.4; }
+  50%  { transform: translateX(-50%) scaleX(1.2); opacity: 0.8; }
+  100% { transform: translateX(-50%) scaleX(0.8); opacity: 0.4; }
+}
+
+/* =============================================
+   TREES (left & right)
+   ============================================= */
+.trees {
+  position: absolute;
+  bottom: 20%;
+  left: 0; right: 0;
+}
+.tree {
+  position: absolute;
+  bottom: 0;
+}
+.tree-trunk {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #3d2c00;
+  border-radius: 2px;
+}
+.tree-top {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--tree-dark);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.tree-top-2 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--tree-mid);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+/* Left cluster */
+.t-l1 { left: 2%; }
+.t-l1 .tree-trunk { width: 6px; height: 25px; }
+.t-l1 .tree-top { width: 36px; height: 55px; bottom: 22px; }
+.t-l1 .tree-top-2 { width: 28px; height: 40px; bottom: 45px; }
+
+.t-l2 { left: 8%; }
+.t-l2 .tree-trunk { width: 5px; height: 18px; }
+.t-l2 .tree-top { width: 28px; height: 42px; bottom: 15px; }
+.t-l2 .tree-top-2 { width: 22px; height: 30px; bottom: 34px; }
+
+.t-l3 { left: 14%; }
+.t-l3 .tree-trunk { width: 7px; height: 30px; }
+.t-l3 .tree-top { width: 42px; height: 65px; bottom: 26px; }
+.t-l3 .tree-top-2 { width: 32px; height: 45px; bottom: 54px; }
+
+/* Right cluster */
+.t-r1 { right: 3%; }
+.t-r1 .tree-trunk { width: 6px; height: 22px; }
+.t-r1 .tree-top { width: 34px; height: 52px; bottom: 19px; }
+.t-r1 .tree-top-2 { width: 26px; height: 36px; bottom: 42px; }
+
+.t-r2 { right: 9%; }
+.t-r2 .tree-trunk { width: 5px; height: 17px; }
+.t-r2 .tree-top { width: 26px; height: 40px; bottom: 14px; }
+.t-r2 .tree-top-2 { width: 20px; height: 28px; bottom: 32px; }
+
+.t-r3 { right: 15%; }
+.t-r3 .tree-trunk { width: 7px; height: 28px; }
+.t-r3 .tree-top { width: 40px; height: 60px; bottom: 24px; }
+.t-r3 .tree-top-2 { width: 30px; height: 42px; bottom: 50px; }
+
+/* Animate trees slightly */
+.tree-top, .tree-top-2 {
+  animation: treeSway 6s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+}
+.tree-top-2 { animation-delay: 1s; }
+@keyframes treeSway {
+  0%  { transform: translateX(-50%) rotate(-1deg); }
+  100%{ transform: translateX(-50%) rotate(1deg); }
+}
+
+/* =============================================
+   STAIRCASE PLATFORM
+   ============================================= */
+.platform {
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.platform-step {
+  background: linear-gradient(180deg, var(--gold-deep) 0%, var(--gold-dark) 100%);
+  border-top: 2px solid rgba(255,215,0,0.4);
+  border-bottom: 1px solid rgba(0,0,0,0.4);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+.step-1 { width: 220px; height: 12px; border-radius: 2px; }
+.step-2 { width: 180px; height: 10px; }
+.step-3 { width: 150px; height: 8px; }
+
+/* =============================================
+   PAGODA — CSS-only built from divs
+   ============================================= */
+.pagoda {
+  position: absolute;
+  bottom: calc(18% + 30px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  filter: drop-shadow(0 0 20px rgba(255,180,0,0.4));
+  animation: pagodaGlow 5s ease-in-out infinite alternate;
+}
+@keyframes pagodaGlow {
+  0%  { filter: drop-shadow(0 0 12px rgba(255,150,0,0.3)); }
+  100%{ filter: drop-shadow(0 0 30px rgba(255,200,0,0.6)); }
+}
+
+/* Hti (umbrella crown) */
+.hti {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1px;
+}
+.hti-tip {
+  width: 3px; height: 22px;
+  background: linear-gradient(180deg, var(--gold-light, #FFD700) 0%, var(--gold) 100%);
+  border-radius: 2px 2px 0 0;
+}
+.hti-ball {
+  width: 10px; height: 10px;
+  background: radial-gradient(circle at 35% 30%, #fff5a0, var(--gold));
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255,215,0,0.8);
+}
+.hti-ring {
+  height: 5px;
+  background: linear-gradient(180deg, var(--gold) 0%, var(--gold-deep) 100%);
+  border-radius: 50%;
+  margin: 1px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+.hti-r1 { width: 18px; }
+.hti-r2 { width: 24px; }
+.hti-r3 { width: 30px; }
+.hti-r4 { width: 36px; }
+
+/* Stupa tiers (from top to bottom, narrow to wide) */
+.tier {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tier-band {
+  height: 6px;
+  background: linear-gradient(180deg, var(--gold) 0%, var(--gold-deep) 40%, var(--gold-dark) 100%);
+  border-top: 1px solid rgba(255,240,100,0.5);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.tier-belt {
+  height: 3px;
+  background: var(--pagoda-shadow);
+  opacity: 0.5;
+}
+/* Main tiers */
+.t1-band { width: 40px; }
+.t2-band { width: 55px; }
+.t3-band { width: 72px; }
+.t4-band { width: 88px; }
+.t5-band { width: 100px; }
+.t6-band { width: 112px; }
+.t7-band { width: 120px; }
+.t1-belt { width: 44px; }
+.t2-belt { width: 59px; }
+.t3-belt { width: 76px; }
+.t4-belt { width: 92px; }
+.t5-belt { width: 104px; }
+.t6-belt { width: 116px; }
+.t7-belt { width: 124px; }
+
+/* Tapered dome / bell shape */
+.dome {
+  width: 130px;
+  height: 55px;
+  background: linear-gradient(180deg,
+    var(--gold) 0%,
+    var(--gold-deep) 50%,
+    var(--gold-dark) 100%);
+  border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+  border-top: 2px solid rgba(255,240,100,0.4);
+  box-shadow: inset -8px -8px 20px rgba(0,0,0,0.3), 0 4px 10px rgba(0,0,0,0.3);
+  position: relative;
+}
+.dome::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  width: 30%;
+  height: 60%;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  transform: rotate(-15deg);
+}
+
+/* Base / kye-waing */
+.base {
+  width: 150px;
+  height: 18px;
+  background: linear-gradient(180deg, var(--gold) 0%, var(--gold-deep) 100%);
+  border-top: 2px solid rgba(255,240,100,0.5);
+  border-bottom: 3px solid var(--pagoda-shadow);
+  border-radius: 2px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+.base-2 {
+  width: 160px;
+  height: 14px;
+  background: linear-gradient(180deg, var(--gold-deep) 0%, var(--gold-dark) 100%);
+  border-top: 2px solid rgba(255,200,0,0.3);
+  border-radius: 2px;
+}
+
+/* Prayer hall attached below */
+.hall {
+  position: absolute;
+  bottom: calc(18% + 42px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+}
+.hall-roof {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hall-roof-top {
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 0 70px 28px 70px;
+  border-color: transparent transparent var(--gold-dark) transparent;
+  filter: brightness(0.8);
+}
+.hall-roof-mid {
+  width: 160px; height: 16px;
+  background: linear-gradient(180deg, var(--gold-deep) 0%, var(--gold-dark) 100%);
+  border-top: 2px solid rgba(255,200,0,0.3);
+}
+.hall-roof-bot {
+  width: 180px; height: 20px;
+  background: linear-gradient(180deg, var(--gold-dark) 0%, var(--pagoda-shadow) 100%);
+  border-radius: 0 0 4px 4px;
+}
+.hall-body {
+  width: 160px; height: 36px;
+  background: linear-gradient(180deg, #3d2800 0%, #1a1000 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 16px;
+  border-bottom: 3px solid var(--pagoda-shadow);
+}
+.hall-window {
+  width: 12px; height: 20px;
+  background: rgba(255,180,0,0.3);
+  border: 1px solid rgba(255,200,0,0.4);
+  border-radius: 6px 6px 0 0;
+  box-shadow: 0 0 8px rgba(255,150,0,0.3);
+  animation: windowGlow 3s ease-in-out infinite alternate;
+}
+@keyframes windowGlow {
+  0%  { background: rgba(255,130,0,0.2); box-shadow: 0 0 4px rgba(255,120,0,0.2); }
+  100%{ background: rgba(255,200,0,0.5); box-shadow: 0 0 12px rgba(255,180,0,0.5); }
+}
+
+/* =============================================
+   LANTERNS
+   ============================================= */
+.lantern {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: lanternSway 4s ease-in-out infinite alternate;
+}
+.lantern-string {
+  width: 1px;
+  height: 25px;
+  background: rgba(180, 130, 0, 0.5);
+}
+.lantern-body {
+  width: 16px; height: 22px;
+  background: radial-gradient(circle at 40% 35%, rgba(255,220,100,0.9), rgba(220,80,0,0.8));
+  border-radius: 30% 30% 40% 40%;
+  border: 1px solid rgba(255,150,0,0.4);
+  box-shadow: 0 0 15px rgba(255,120,0,0.7), 0 0 30px rgba(255,80,0,0.3);
+  animation: lanternFlicker 2s ease-in-out infinite alternate;
+}
+.lantern-tassel {
+  width: 2px; height: 10px;
+  background: rgba(255,120,0,0.6);
+  border-radius: 0 0 2px 2px;
+}
+@keyframes lanternSway {
+  0%  { transform: rotate(-4deg); }
+  100%{ transform: rotate(4deg); }
+}
+@keyframes lanternFlicker {
+  0%  { box-shadow: 0 0 10px rgba(255,120,0,0.5), 0 0 20px rgba(255,80,0,0.2); }
+  100%{ box-shadow: 0 0 20px rgba(255,200,0,0.8), 0 0 40px rgba(255,120,0,0.4); }
+}
+.lantern-left  { bottom: calc(22% + 60px); left: 28%; transform-origin: top center; }
+.lantern-right { bottom: calc(22% + 60px); right: 28%; transform-origin: top center; animation-delay: 1s; }
+.lantern-left2  { bottom: calc(22% + 80px); left: 20%; transform-origin: top center; animation-delay: 0.5s; }
+.lantern-right2 { bottom: calc(22% + 80px); right: 20%; transform-origin: top center; animation-delay: 1.5s; }
+
+/* =============================================
+   FIREFLIES
+   ============================================= */
+.firefly {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: rgba(200, 255, 100, 0.9);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(200,255,100,0.8);
+  animation: fireflyFloat linear infinite;
+}
+@keyframes fireflyFloat {
+  0%   { transform: translate(0,0); opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 0.8; }
+  100% { transform: translate(var(--dx), var(--dy)); opacity: 0; }
+}
+
+/* =============================================
+   TITLE / CAPTION
+   ============================================= */
+.caption {
+  position: absolute;
+  top: 16px;
+  left: 0; right: 0;
+  text-align: center;
+  z-index: 10;
+}
+.caption-main {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(255,180,0,0.6), 0 2px 4px rgba(0,0,0,0.8);
+  letter-spacing: 4px;
+  animation: captionShimmer 4s ease-in-out infinite alternate;
+}
+@keyframes captionShimmer {
+  0%  { text-shadow: 0 0 15px rgba(255,150,0,0.4), 0 2px 4px rgba(0,0,0,0.8); color: #D4A017; }
+  100%{ text-shadow: 0 0 30px rgba(255,220,0,0.7), 0 2px 4px rgba(0,0,0,0.8); color: #FFE066; }
+}
+.caption-sub {
+  font-style: italic;
+  font-size: clamp(10px, 2vw, 14px);
+  color: rgba(255,200,150,0.7);
+  letter-spacing: 2px;
+  margin-top: 3px;
+}
+.caption-myanmar {
+  font-size: clamp(12px, 2.5vw, 18px);
+  color: rgba(255,220,120,0.8);
+  margin-top: 4px;
+  letter-spacing: 1px;
+}
+
+/* =============================================
+   SIGNATURE
+   ============================================= */
+.signature {
+  text-align: center;
+  padding: 14px;
+  color: rgba(212,160,23,0.5);
+  font-size: 12px;
+  font-style: italic;
+  letter-spacing: 2px;
+}
+</style>
+</head>
+<body>
+
+<div class="scene" id="scene">
+
+  <!-- SKY -->
+  <div class="sky"></div>
+
+  <!-- STARS (generated by JS) -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Moon -->
+  <div class="moon"></div>
+
+  <!-- Horizon Glow -->
+  <div class="horizon-glow"></div>
+
+  <!-- Distant Hills -->
+  <div class="hills">
+    <div class="hill hill-4"></div>
+    <div class="hill hill-1"></div>
+    <div class="hill hill-3"></div>
+    <div class="hill hill-2"></div>
+  </div>
+
+  <!-- GROUND -->
+  <div class="ground"></div>
+
+  <!-- WATER -->
+  <div class="water">
+    <div class="water-shimmer"></div>
+    <div class="water-glow"></div>
+    <div class="ripple ripple-1"></div>
+    <div class="ripple ripple-2"></div>
+    <div class="ripple ripple-3"></div>
+    <div class="ripple ripple-4"></div>
+  </div>
+
+  <!-- TREES LEFT -->
+  <div class="trees">
+    <div class="tree t-l3">
+      <div class="tree-top-2"></div>
+      <div class="tree-top"></div>
+      <div class="tree-trunk"></div>
+    </div>
+    <div class="tree t-l2">
+      <div class="tree-top-2"></div>
+      <div class="tree-top"></div>
+      <div class="tree-trunk"></div>
+    </div>
+    <div class="tree t-l1">
+      <div class="tree-top-2"></div>
+      <div class="tree-top"></div>
+      <div class="tree-trunk"></div>
+    </div>
+    <div class="tree t-r1">
+      <div class="tree-top-2"></div>
+      <div class="tree-top"></div>
+      <div class="tree-trunk"></div>
+    </div>
+    <div class="tree t-r2">
+      <div class="tree-top-2"></div>
+      <div class="tree-top"></div>
+      <div class="tree-trunk"></div>
+    </div>
+    <div class="tree t-r3">
+      <div class="tree-top-2"></div>
+      <div class="tree-top"></div>
+      <div class="tree-trunk"></div>
+    </div>
+  </div>
+
+  <!-- PRAYER HALL -->
+  <div class="hall">
+    <div class="hall-roof">
+      <div class="hall-roof-top"></div>
+      <div class="hall-roof-mid"></div>
+      <div class="hall-roof-bot"></div>
+    </div>
+    <div class="hall-body">
+      <div class="hall-window"></div>
+      <div class="hall-window"></div>
+      <div class="hall-window"></div>
+      <div class="hall-window"></div>
+      <div class="hall-window"></div>
+    </div>
+  </div>
+
+  <!-- STAIRCASE -->
+  <div class="platform">
+    <div class="platform-step step-3"></div>
+    <div class="platform-step step-2"></div>
+    <div class="platform-step step-1"></div>
+  </div>
+
+  <!-- PAGODA -->
+  <div class="pagoda">
+    <!-- Hti Crown -->
+    <div class="hti">
+      <div class="hti-tip"></div>
+      <div class="hti-ball"></div>
+      <div class="hti-ring hti-r1"></div>
+      <div class="hti-ring hti-r2"></div>
+      <div class="hti-ring hti-r3"></div>
+      <div class="hti-ring hti-r4"></div>
+    </div>
+    <!-- Octagonal tiers -->
+    <div class="tier"><div class="tier-band t1-band"></div><div class="tier-belt t1-belt"></div></div>
+    <div class="tier"><div class="tier-band t2-band"></div><div class="tier-belt t2-belt"></div></div>
+    <div class="tier"><div class="tier-band t3-band"></div><div class="tier-belt t3-belt"></div></div>
+    <div class="tier"><div class="tier-band t4-band"></div><div class="tier-belt t4-belt"></div></div>
+    <div class="tier"><div class="tier-band t5-band"></div><div class="tier-belt t5-belt"></div></div>
+    <div class="tier"><div class="tier-band t6-band"></div><div class="tier-belt t6-belt"></div></div>
+    <div class="tier"><div class="tier-band t7-band"></div><div class="tier-belt t7-belt"></div></div>
+    <!-- Bell dome -->
+    <div class="dome"></div>
+    <!-- Bases -->
+    <div class="base"></div>
+    <div class="base-2"></div>
+  </div>
+
+  <!-- LANTERNS -->
+  <div class="lantern lantern-left2">
+    <div class="lantern-string"></div>
+    <div class="lantern-body"></div>
+    <div class="lantern-tassel"></div>
+  </div>
+  <div class="lantern lantern-left">
+    <div class="lantern-string"></div>
+    <div class="lantern-body"></div>
+    <div class="lantern-tassel"></div>
+  </div>
+  <div class="lantern lantern-right">
+    <div class="lantern-string"></div>
+    <div class="lantern-body"></div>
+    <div class="lantern-tassel"></div>
+  </div>
+  <div class="lantern lantern-right2">
+    <div class="lantern-string"></div>
+    <div class="lantern-body"></div>
+    <div class="lantern-tassel"></div>
+  </div>
+
+  <!-- CAPTION -->
+  <div class="caption">
+    <div class="caption-main">✦ GOLDEN PAGODA ✦</div>
+    <div class="caption-myanmar">ရွှေဘုရားတော်</div>
+    <div class="caption-sub">Myanmar — Pure CSS Art</div>
+  </div>
+
+  <!-- Fireflies container -->
+  <div id="fireflies"></div>
+
+</div>
+
+<div class="signature">Pure CSS · HTML · No Canvas · No SVG</div>
+
+<script>
+// Generate stars
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 80; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `
+    left: ${Math.random()*100}%;
+    top: ${Math.random()*55}%;
+    width: ${size}px;
+    height: ${size}px;
+    animation-duration: ${1.5 + Math.random()*3}s;
+    animation-delay: ${Math.random()*4}s;
+    opacity: ${0.3 + Math.random()*0.7};
+  `;
+  starsEl.appendChild(s);
+}
+
+// Generate fireflies
+const ffEl = document.getElementById('fireflies');
+for (let i = 0; i < 20; i++) {
+  const f = document.createElement('div');
+  f.className = 'firefly';
+  const dx = (Math.random() - 0.5) * 120;
+  const dy = (Math.random() - 0.5) * 80;
+  f.style.cssText = `
+    left: ${15 + Math.random()*70}%;
+    top: ${25 + Math.random()*40}%;
+    --dx: ${dx}px;
+    --dy: ${dy}px;
+    animation-duration: ${4 + Math.random()*6}s;
+    animation-delay: ${Math.random()*6}s;
+  `;
+  ffEl.appendChild(f);
+}
+</script>
+</body>
+</html>

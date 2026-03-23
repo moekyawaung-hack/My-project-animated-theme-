@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ CSS Animation Collection</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Space+Mono:ital@0;1&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body {
+  font-family:'Rajdhani',sans-serif;
+  background:#0a0a0f;
+  color:#e0e0e0;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ===== NAV TABS ===== */
+.nav {
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px;
+  padding:10px;
+  background:#111118;
+  border-bottom:2px solid #222230;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.tab {
+  padding:6px 14px;
+  border-radius:4px;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:1px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:transparent;
+  color:#888;
+  transition:all .2s;
+  white-space:nowrap;
+}
+.tab:hover { color:#fff; border-color:#444; }
+.tab.active { background:var(--accent,#fff); color:#000; border-color:transparent; }
+
+/* ===== SCENE WRAPPER ===== */
+.scene-wrap { display:none; }
+.scene-wrap.active { display:block; }
+
+.scene {
+  position:relative;
+  width:100%;
+  height:340px;
+  overflow:hidden;
+}
+
+/* ===== TITLE BAR ===== */
+.scene-title {
+  position:absolute;
+  top:14px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:13px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  font-family:'Space Mono',monospace;
+  z-index:20;
+  white-space:nowrap;
+}
+
+/* ======================================================
+   SCENE 1 — DRAGON
+   ====================================================== */
+.dragon-scene {
+  background:radial-gradient(ellipse at 30% 40%, #1a0630 0%, #08001a 60%, #000010 100%);
+}
+.dragon-scene .scene-title { color:#c77dff; text-shadow:0 0 20px #7b2fbe; }
+
+/* Stars */
+.d-stars { position:absolute; inset:0; }
+.d-star {
+  position:absolute; border-radius:50%;
+  background:#fff;
+  animation:dStarTwinkle ease-in-out infinite alternate;
+}
+@keyframes dStarTwinkle { 0%{opacity:.2;} 100%{opacity:1;} }
+
+/* Moon */
+.d-moon {
+  position:absolute; top:12%; right:10%;
+  width:50px; height:50px;
+  background:radial-gradient(circle at 35% 35%, #fffbe6, #c8a84b);
+  border-radius:50%;
+  box-shadow:0 0 30px rgba(200,168,75,.5);
+  animation:moonFloat 6s ease-in-out infinite alternate;
+}
+@keyframes moonFloat { 0%{transform:translateY(0);} 100%{transform:translateY(-8px);} }
+
+/* Clouds */
+.d-cloud {
+  position:absolute;
+  background:rgba(100,50,180,.25);
+  border-radius:50px;
+  animation:dCloudDrift linear infinite;
+}
+@keyframes dCloudDrift { from{transform:translateX(-200px);} to{transform:translateX(110vw);} }
+
+/* Dragon body */
+.dragon {
+  position:absolute;
+  top:22%;
+  animation:dragonFly 6s ease-in-out infinite;
+}
+@keyframes dragonFly {
+  0%  { left:-120px; top:25%; }
+  40% { top:15%; }
+  70% { top:30%; }
+  100%{ left:110%; top:22%; }
+}
+
+.dragon-body {
+  position:relative;
+  width:90px; height:28px;
+  background:linear-gradient(135deg,#22c55e 0%,#15803d 60%,#14532d 100%);
+  border-radius:50% 20% 20% 50% / 60% 30% 30% 60%;
+  box-shadow:inset -6px -4px 10px rgba(0,0,0,.4);
+}
+/* Head */
+.dragon-head {
+  position:absolute;
+  right:-42px; top:-4px;
+  width:44px; height:26px;
+  background:linear-gradient(135deg,#22c55e,#15803d);
+  border-radius:30% 60% 60% 20%;
+  box-shadow:inset -4px -3px 8px rgba(0,0,0,.3);
+}
+.dragon-eye {
+  position:absolute;
+  right:10px; top:6px;
+  width:6px; height:6px;
+  background:#ff4444;
+  border-radius:50%;
+  box-shadow:0 0 6px #ff0000;
+  animation:blink 4s infinite;
+}
+@keyframes blink { 0%,95%,100%{transform:scaleY(1);} 97%{transform:scaleY(0);} }
+.dragon-nostril {
+  position:absolute;
+  right:4px; top:14px;
+  width:4px; height:3px;
+  background:#ff6b00;
+  border-radius:50%;
+}
+/* Horn */
+.dragon-horn {
+  position:absolute;
+  right:16px; top:-12px;
+  width:0; height:0;
+  border-left:4px solid transparent;
+  border-right:4px solid transparent;
+  border-bottom:14px solid #86efac;
+}
+/* Fire */
+.dragon-fire {
+  position:absolute;
+  right:-28px; top:8px;
+  animation:fireBreath .4s ease-in-out infinite alternate;
+}
+@keyframes fireBreath { 0%{transform:scaleX(1) scaleY(.8);} 100%{transform:scaleX(1.3) scaleY(1.2);} }
+.fire-main {
+  width:28px; height:10px;
+  background:linear-gradient(90deg,transparent,#ff4500,#ff8c00,#ffd700);
+  border-radius:0 50% 50% 0;
+  box-shadow:0 0 12px #ff4500;
+}
+.fire-top {
+  position:absolute;
+  top:-4px; left:5px;
+  width:18px; height:7px;
+  background:linear-gradient(90deg,transparent,#fff,#ffeb3b);
+  border-radius:0 50% 50% 0;
+  opacity:.8;
+}
+
+/* Wings */
+.dragon-wing {
+  position:absolute;
+  top:-30px;
+  transform-origin:bottom center;
+}
+.dragon-wing.left  { left:15px; animation:wingFlapL .5s ease-in-out infinite alternate; }
+.dragon-wing.right { left:35px; animation:wingFlapR .5s ease-in-out infinite alternate; animation-delay:.1s; }
+@keyframes wingFlapL {
+  0%  { transform:rotate(-20deg) scaleY(.5); }
+  100%{ transform:rotate(10deg) scaleY(1.2); }
+}
+@keyframes wingFlapR {
+  0%  { transform:rotate(15deg) scaleY(.6); }
+  100%{ transform:rotate(-15deg) scaleY(1.1); }
+}
+.wing-shape {
+  width:0; height:0;
+  border-left:30px solid transparent;
+  border-right:0px solid transparent;
+  border-bottom:35px solid rgba(134,239,172,.6);
+  filter:drop-shadow(0 0 6px rgba(34,197,94,.5));
+}
+.wing-shape.r { transform:scaleX(-1); }
+
+/* Tail */
+.dragon-tail {
+  position:absolute;
+  left:-55px; top:8px;
+  width:55px; height:10px;
+  background:linear-gradient(90deg,transparent,#15803d);
+  border-radius:50%;
+  transform-origin:right center;
+  animation:tailWag .6s ease-in-out infinite alternate;
+}
+@keyframes tailWag { 0%{transform:rotate(-15deg);} 100%{transform:rotate(15deg);} }
+.tail-tip {
+  position:absolute;
+  left:-8px; top:-3px;
+  width:0; height:0;
+  border-top:4px solid transparent;
+  border-bottom:4px solid transparent;
+  border-right:10px solid #15803d;
+}
+
+/* Sparkle trail */
+.dragon-sparkle {
+  position:absolute;
+  border-radius:50%;
+  animation:sparkleFade .8s ease-out infinite;
+}
+@keyframes sparkleFade { 0%{transform:scale(1);opacity:.8;} 100%{transform:scale(0);opacity:0;} }
+
+/* Ground hills */
+.d-hills {
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:90px;
+}
+.d-hill {
+  position:absolute;
+  bottom:0;
+  border-radius:50% 50% 0 0;
+  background:linear-gradient(180deg,#1e1035,#0d0820);
+}
+.dh1{width:40%;height:80px;left:-5%;}
+.dh2{width:50%;height:95px;left:30%;background:linear-gradient(180deg,#160c28,#080614);}
+.dh3{width:35%;height:70px;right:-5%;}
+
+/* ======================================================
+   SCENE 2 — WALKING PERSON
+   ====================================================== */
+.walk-scene {
+  background:linear-gradient(180deg,#87CEEB 0%,#b0e2ff 55%,#4a7c23 55%,#2d5016 100%);
+}
+.walk-scene .scene-title { color:#1a3a0a; text-shadow:0 2px 4px rgba(255,255,255,.5); }
+
+/* Road */
+.walk-road {
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:42%;
+  background:linear-gradient(180deg,#4a7c23,#2d5016);
+}
+/* Dashed lane */
+.walk-lane {
+  position:absolute;
+  bottom:30px; left:0; right:0;
+  height:4px;
+  background:repeating-linear-gradient(90deg,
+    rgba(255,255,255,.4) 0px, rgba(255,255,255,.4) 30px,
+    transparent 30px, transparent 60px);
+  animation:laneScroll 1s linear infinite;
+}
+@keyframes laneScroll { to{background-position:-60px 0;} }
+
+/* Clouds */
+.wc { position:absolute; animation:wcDrift linear infinite; }
+.wc-body { background:white; border-radius:30px; }
+.wc::before,.wc::after { content:''; position:absolute; background:white; border-radius:50%; }
+@keyframes wcDrift { from{transform:translateX(-150px);} to{transform:translateX(110vw);} }
+.wc1{top:12%;animation-duration:18s;}  .wc1 .wc-body{width:70px;height:18px;}
+.wc1::before{width:30px;height:30px;top:-15px;left:8px;}
+.wc1::after{width:22px;height:22px;top:-10px;left:30px;}
+.wc2{top:25%;animation-duration:25s;animation-delay:-8s;} .wc2 .wc-body{width:50px;height:14px;}
+.wc2::before{width:22px;height:22px;top:-12px;left:6px;}
+.wc2::after{width:16px;height:16px;top:-8px;left:22px;}
+
+/* Sun */
+.w-sun {
+  position:absolute; top:8%; left:12%;
+  width:44px; height:44px;
+  background:radial-gradient(circle,#fff176,#ffd600);
+  border-radius:50%;
+  box-shadow:0 0 0 8px rgba(255,214,0,.2), 0 0 0 16px rgba(255,214,0,.1);
+  animation:sunSpin 12s linear infinite;
+}
+.w-sun-ray {
+  position:absolute;
+  width:3px; height:12px;
+  background:#ffd600;
+  border-radius:2px;
+  top:50%; left:50%;
+  transform-origin:0 -26px;
+}
+
+/* Person */
+.person {
+  position:absolute;
+  bottom:43%;
+  left:50%;
+  transform:translateX(-50%);
+  width:30px;
+  animation:personBob .5s ease-in-out infinite alternate;
+}
+@keyframes personBob { 0%{transform:translateX(-50%) translateY(0);} 100%{transform:translateX(-50%) translateY(-3px);} }
+
+/* Head */
+.p-head {
+  width:18px; height:18px;
+  background:radial-gradient(circle at 40% 35%,#FDBCB4,#e8967a);
+  border-radius:50%;
+  margin:0 auto;
+  position:relative;
+}
+.p-hair {
+  position:absolute;
+  top:-3px; left:1px; right:1px;
+  height:8px;
+  background:#5a3e2b;
+  border-radius:50% 50% 0 0;
+}
+/* Body */
+.p-body {
+  width:16px; height:22px;
+  background:linear-gradient(180deg,#3b82f6,#1d4ed8);
+  border-radius:4px 4px 2px 2px;
+  margin:0 auto;
+  position:relative;
+}
+/* Arms */
+.p-arm {
+  position:absolute;
+  width:6px; height:16px;
+  background:#3b82f6;
+  border-radius:3px;
+  top:2px;
+  transform-origin:top center;
+}
+.p-arm.left  { left:-6px; animation:armSwingL .5s ease-in-out infinite alternate; }
+.p-arm.right { right:-6px; animation:armSwingR .5s ease-in-out infinite alternate; }
+@keyframes armSwingL { 0%{transform:rotate(-35deg);} 100%{transform:rotate(35deg);} }
+@keyframes armSwingR { 0%{transform:rotate(35deg);} 100%{transform:rotate(-35deg);} }
+/* Hand */
+.p-hand {
+  position:absolute;
+  bottom:-4px; left:50%;
+  transform:translateX(-50%);
+  width:6px; height:6px;
+  background:#FDBCB4;
+  border-radius:50%;
+}
+/* Legs */
+.p-legs {
+  display:flex;
+  justify-content:center;
+  gap:2px;
+  position:relative;
+}
+.p-leg {
+  width:7px; height:18px;
+  background:#1e40af;
+  border-radius:2px;
+  position:relative;
+  transform-origin:top center;
+}
+.p-leg.left  { animation:legSwingL .5s ease-in-out infinite alternate; }
+.p-leg.right { animation:legSwingR .5s ease-in-out infinite alternate; }
+@keyframes legSwingL { 0%{transform:rotate(-30deg);} 100%{transform:rotate(25deg);} }
+@keyframes legSwingR { 0%{transform:rotate(25deg);} 100%{transform:rotate(-30deg);} }
+.p-shoe {
+  position:absolute;
+  bottom:-4px; left:0;
+  width:10px; height:5px;
+  background:#1a1a1a;
+  border-radius:2px 4px 4px 2px;
+}
+/* Scrolling BG elements */
+.w-tree {
+  position:absolute;
+  bottom:42%;
+  animation:wTreeScroll linear infinite;
+}
+@keyframes wTreeScroll { from{right:-60px;} to{right:110%;} }
+.wt-trunk { width:8px; height:30px; background:#5a3e2b; margin:0 auto; }
+.wt-top {
+  width:0; height:0;
+  border-left:20px solid transparent;
+  border-right:20px solid transparent;
+  border-bottom:35px solid #2d5016;
+  margin:0 auto;
+}
+.wt-top2 {
+  width:0; height:0;
+  border-left:14px solid transparent;
+  border-right:14px solid transparent;
+  border-bottom:24px solid #4a7c23;
+  margin:0 auto;
+  position:relative;
+  top:-12px;
+}
+
+/* ======================================================
+   SCENE 3 — OCEAN WAVES
+   ====================================================== */
+.ocean-scene {
+  background:linear-gradient(180deg,#001a33 0%,#003366 35%,#004080 100%);
+}
+.ocean-scene .scene-title { color:#67e8f9; text-shadow:0 0 15px #0891b2; }
+
+/* Seagulls */
+.seagull {
+  position:absolute;
+  animation:seagullFly linear infinite;
+}
+@keyframes seagullFly { from{left:-60px;} to{left:110%;} }
+.sg-wing {
+  width:20px; height:4px;
+  border-top:3px solid #e0e0e0;
+  border-radius:50% 0 0 50%;
+  display:inline-block;
+  animation:sgFlap .6s ease-in-out infinite alternate;
+}
+.sg-wing.r { transform:scaleX(-1); animation-delay:.1s; }
+@keyframes sgFlap { 0%{transform:rotate(-20deg);} 100%{transform:rotate(20deg);} }
+.sg-wing.r { animation:sgFlapR .6s ease-in-out infinite alternate; }
+@keyframes sgFlapR { 0%{transform:scaleX(-1) rotate(-20deg);} 100%{transform:scaleX(-1) rotate(20deg);} }
+
+/* Boat */
+.o-boat {
+  position:absolute;
+  bottom:40%;
+  left:75%;
+  animation:boatRock 3s ease-in-out infinite alternate;
+  transform-origin:bottom center;
+}
+@keyframes boatRock { 0%{transform:rotate(-3deg) translateY(0);} 100%{transform:rotate(3deg) translateY(-4px);} }
+.boat-hull {
+  width:55px; height:16px;
+  background:linear-gradient(180deg,#92400e,#78350f);
+  border-radius:4px 4px 50% 50%;
+  border-bottom:3px solid #451a03;
+  position:relative;
+}
+.boat-sail {
+  position:absolute;
+  bottom:14px; left:20px;
+  width:0; height:0;
+  border-left:18px solid rgba(255,255,255,.9);
+  border-top:0px;
+  border-bottom:36px solid transparent;
+  border-right:0px;
+  filter:drop-shadow(0 0 4px rgba(255,255,255,.3));
+}
+.boat-mast {
+  position:absolute;
+  bottom:14px; left:20px;
+  width:2px; height:40px;
+  background:#5a3e2b;
+}
+.boat-flag {
+  position:absolute;
+  bottom:52px; left:22px;
+  width:12px; height:7px;
+  background:#ef4444;
+  animation:flagWave .5s ease-in-out infinite alternate;
+  transform-origin:left center;
+}
+@keyframes flagWave { 0%{transform:skewY(-10deg);} 100%{transform:skewY(10deg);} }
+
+/* Moon/stars on ocean */
+.o-moon {
+  position:absolute; top:6%; right:8%;
+  width:35px; height:35px;
+  background:radial-gradient(circle at 35% 35%,#fffde7,#f9a825);
+  border-radius:50%;
+  box-shadow:0 0 25px rgba(249,168,37,.4);
+}
+
+/* Wave layers */
+.wave-layer {
+  position:absolute;
+  left:0; right:0;
+  animation:waveRoll linear infinite;
+}
+@keyframes waveRoll { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+
+.wave-svg { width:200%; height:100%; }
+
+/* Bubbles */
+.bubble {
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(100,200,255,.4);
+  background:rgba(100,200,255,.05);
+  animation:bubbleRise linear infinite;
+}
+@keyframes bubbleRise {
+  0%  { transform:translateY(0) scale(1); opacity:.6; }
+  100%{ transform:translateY(-200px) scale(1.5); opacity:0; }
+}
+
+/* Foam */
+.foam {
+  position:absolute;
+  background:rgba(255,255,255,.7);
+  border-radius:50%;
+  animation:foamFade 2s ease-in-out infinite;
+}
+@keyframes foamFade { 0%,100%{opacity:.3;transform:scale(.8);} 50%{opacity:.8;transform:scale(1.1);} }
+
+/* ======================================================
+   SCENE 4 — DAY/NIGHT CYCLE
+   ====================================================== */
+.daynight-scene { overflow:hidden; }
+.daynight-scene .scene-title { color:#fff; text-shadow:0 0 10px rgba(0,0,0,.5); z-index:21; }
+
+.dn-sky {
+  position:absolute; inset:0;
+  animation:dnSkyChange 12s linear infinite;
+}
+@keyframes dnSkyChange {
+  0%   { background:linear-gradient(180deg,#001144 0%,#002244 60%,#001122 100%); }/* midnight */
+  15%  { background:linear-gradient(180deg,#0d1b6e 0%,#1a2a8a 60%,#0d1b6e 100%); }/* pre-dawn */
+  25%  { background:linear-gradient(180deg,#ff6b35 0%,#ff9f4a 40%,#ffc87a 70%,#87CEEB 100%); }/* sunrise */
+  40%  { background:linear-gradient(180deg,#4ca3dd 0%,#87CEEB 50%,#b8e4f9 100%); }/* morning */
+  55%  { background:linear-gradient(180deg,#1a6fb5 0%,#4ca3dd 50%,#87CEEB 100%); }/* noon */
+  70%  { background:linear-gradient(180deg,#f4a261 0%,#e76f51 30%,#264653 100%); }/* sunset */
+  83%  { background:linear-gradient(180deg,#001133 0%,#001a44 60%,#001122 100%); }/* dusk */
+  100% { background:linear-gradient(180deg,#001144 0%,#002244 60%,#001122 100%); }/* midnight */
+}
+
+/* Sun */
+.dn-sun {
+  position:absolute;
+  width:52px; height:52px;
+  background:radial-gradient(circle at 40% 40%,#fff9c4,#ffd600 50%,#ff8c00);
+  border-radius:50%;
+  left:50%; transform:translateX(-50%);
+  box-shadow:0 0 0 10px rgba(255,214,0,.15), 0 0 40px rgba(255,180,0,.3);
+  animation:sunArc 12s linear infinite;
+}
+@keyframes sunArc {
+  0%   { bottom:-10%; opacity:0; }
+  15%  { bottom:10%; opacity:.5; }
+  25%  { bottom:30%; opacity:1; box-shadow:0 0 0 12px rgba(255,140,0,.3),0 0 60px rgba(255,100,0,.5); }
+  50%  { bottom:72%; opacity:1; box-shadow:0 0 0 14px rgba(255,214,0,.2),0 0 50px rgba(255,220,0,.3); }
+  70%  { bottom:25%; opacity:1; box-shadow:0 0 0 12px rgba(255,100,0,.25),0 0 55px rgba(255,60,0,.4); }
+  82%  { bottom:5%; opacity:.4; }
+  83%  { bottom:-15%; opacity:0; }
+  100% { bottom:-15%; opacity:0; }
+}
+/* Sun rays */
+.dn-sun-rays {
+  position:absolute;
+  width:52px; height:52px;
+  left:50%; transform:translateX(-50%);
+  animation:sunArc 12s linear infinite, sunRaysSpin 4s linear infinite;
+}
+@keyframes sunRaysSpin { to{transform:translateX(-50%) rotate(360deg);} }
+.dn-ray {
+  position:absolute;
+  width:3px; height:14px;
+  background:rgba(255,220,0,.5);
+  border-radius:2px;
+  top:50%; left:50%;
+  transform-origin:0 -34px;
+}
+
+/* Moon */
+.dn-moon {
+  position:absolute;
+  width:40px; height:40px;
+  background:radial-gradient(circle at 35% 35%,#fffde7,#bdbdbd);
+  border-radius:50%;
+  left:50%; transform:translateX(-50%);
+  box-shadow:0 0 20px rgba(200,200,255,.3);
+  animation:moonArc 12s linear infinite;
+}
+.dn-moon::before {
+  content:''; position:absolute;
+  width:28px; height:28px;
+  border-radius:50%;
+  top:2px; right:4px;
+  animation:moonCrater 12s linear infinite;
+}
+@keyframes moonArc {
+  0%   { bottom:50%; opacity:1; }
+  22%  { bottom:15%; opacity:.6; }
+  24%  { bottom:-10%; opacity:0; }
+  25%  { bottom:-10%; opacity:0; }
+  82%  { bottom:-10%; opacity:0; }
+  85%  { bottom:15%; opacity:.5; }
+  95%  { bottom:55%; opacity:1; }
+  100% { bottom:50%; opacity:1; }
+}
+@keyframes moonCrater {
+  0%,82%,100%{ background:#e0e0e0; }
+  25%,70%{ background:transparent; }
+}
+
+/* Stars */
+.dn-stars {
+  position:absolute; inset:0;
+  animation:starsVisibility 12s linear infinite;
+}
+@keyframes starsVisibility {
+  0%  {opacity:1;} 20%{opacity:.5;} 27%{opacity:0;}
+  68%{opacity:0;} 75%{opacity:.5;} 100%{opacity:1;}
+}
+
+/* Ground */
+.dn-ground {
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:30%;
+  animation:groundColor 12s linear infinite;
+}
+@keyframes groundColor {
+  0%,100%{ background:linear-gradient(180deg,#0a1a0a,#050d05); }
+  25%    { background:linear-gradient(180deg,#2d5016,#1a3a0a); }
+  50%    { background:linear-gradient(180deg,#4a7c23,#2d5016); }
+  70%    { background:linear-gradient(180deg,#1a3a0a,#0d1f05); }
+  83%    { background:linear-gradient(180deg,#050d05,#020602); }
+}
+/* Hills */
+.dn-hill {
+  position:absolute; bottom:0;
+  border-radius:50% 50% 0 0;
+}
+.dnh1{width:50%;height:65%;left:-5%;animation:hillColor 12s linear infinite;}
+.dnh2{width:45%;height:75%;left:35%;animation:hillColor 12s linear infinite .5s;}
+.dnh3{width:38%;height:55%;right:-5%;animation:hillColor 12s linear infinite 1s;}
+@keyframes hillColor {
+  0%,100%{background:#061206;}
+  25%    {background:#1e4d0a;}
+  50%    {background:#2d6e12;}
+  70%    {background:#143808;}
+  83%    {background:#040a04;}
+}
+
+/* Buildings silhouette */
+.dn-buildings {
+  position:absolute;
+  bottom:30%; left:0; right:0;
+  height:80px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:4px;
+  animation:buildingColor 12s linear infinite;
+}
+.dn-bldg { background:#0a0a0f; flex-shrink:0; }
+@keyframes buildingColor {
+  0%,100%{filter:brightness(.3);}
+  25%,70%{filter:brightness(.6);}
+  50%    {filter:brightness(.8);}
+}
+.dn-bldg-window {
+  width:4px; height:4px;
+  background:rgba(255,230,100,.0);
+  border-radius:1px;
+  display:inline-block;
+  margin:2px;
+  animation:windowLight 12s linear infinite;
+}
+@keyframes windowLight {
+  0%,75%,100%{background:rgba(255,230,100,.6);}
+  27%,70%{background:rgba(255,230,100,.0);}
+}
+
+/* Time label */
+.time-label {
+  position:absolute;
+  top:14%;
+  right:6%;
+  font-family:'Space Mono',monospace;
+  font-size:11px;
+  color:rgba(255,255,255,.7);
+  animation:timeChange 12s linear infinite;
+  text-shadow:0 0 8px rgba(0,0,0,.5);
+  z-index:10;
+}
+@keyframes timeChange {
+  0%   {content:'12:00 AM';}
+}
+
+/* ======================================================
+   SCENE 5 — RACING CAR
+   ====================================================== */
+.car-scene {
+  background:linear-gradient(180deg,#0f0f1a 0%,#1a1a2e 40%,#252540 100%);
+}
+.car-scene .scene-title { color:#f97316; text-shadow:0 0 15px #ea580c; }
+
+/* Track */
+.car-track {
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:38%;
+  background:linear-gradient(180deg,#1c1c1c,#111);
+}
+.car-track-line {
+  position:absolute;
+  bottom:40%; left:0; right:0;
+  height:3px;
+  background:rgba(255,255,255,.15);
+}
+.car-track-marks {
+  position:absolute;
+  top:30%; left:0; right:0;
+  height:4px;
+  background:repeating-linear-gradient(90deg,
+    rgba(255,255,255,.3) 0px, rgba(255,255,255,.3) 40px,
+    transparent 40px, transparent 80px);
+  animation:trackScroll .4s linear infinite;
+}
+@keyframes trackScroll { to{background-position:-80px 0;} }
+
+/* Speed lines bg */
+.speed-lines {
+  position:absolute;
+  top:5%; bottom:40%;
+  left:0; right:0;
+  overflow:hidden;
+}
+.speed-line {
+  position:absolute;
+  height:1px;
+  background:rgba(255,255,255,.08);
+  right:0;
+  animation:speedLine linear infinite;
+}
+@keyframes speedLine { from{width:0;right:0;} to{width:0;right:110%;} }
+
+/* Racing car */
+.rcar {
+  position:absolute;
+  bottom:36%;
+  left:30%;
+  animation:carBounce .25s ease-in-out infinite alternate;
+}
+@keyframes carBounce { 0%{transform:translateY(0);} 100%{transform:translateY(-2px);} }
+
+.car-body {
+  position:relative;
+  width:110px;
+}
+/* Main body */
+.car-chassis {
+  width:110px; height:22px;
+  background:linear-gradient(180deg,#dc2626,#991b1b);
+  border-radius:4px 4px 2px 2px;
+  position:relative;
+  box-shadow:0 4px 10px rgba(0,0,0,.5);
+}
+/* Cockpit */
+.car-cockpit {
+  position:absolute;
+  top:-18px; left:25px;
+  width:55px; height:22px;
+  background:linear-gradient(135deg,#b91c1c,#7f1d1d);
+  border-radius:10px 10px 0 0;
+}
+.car-windshield {
+  position:absolute;
+  top:3px; left:6px; right:6px;
+  height:13px;
+  background:rgba(100,180,255,.25);
+  border-radius:6px 6px 0 0;
+  border:1px solid rgba(100,180,255,.2);
+}
+/* Spoiler */
+.car-spoiler {
+  position:absolute;
+  top:-8px; right:-2px;
+  width:16px; height:4px;
+  background:#7f1d1d;
+  border-radius:2px;
+}
+.car-spoiler::before {
+  content:''; position:absolute;
+  right:2px; bottom:0;
+  width:2px; height:8px;
+  background:#991b1b;
+}
+/* Number decal */
+.car-number {
+  position:absolute;
+  top:4px; left:10px;
+  font-family:'Space Mono',monospace;
+  font-size:10px;
+  color:rgba(255,255,255,.8);
+  font-weight:bold;
+}
+/* Exhaust */
+.car-exhaust {
+  position:absolute;
+  top:8px; left:-14px;
+}
+.exhaust-puff {
+  position:absolute;
+  border-radius:50%;
+  background:rgba(150,150,150,.4);
+  animation:exhaustPuff .3s ease-out infinite;
+}
+@keyframes exhaustPuff {
+  0%  {width:8px;height:8px;left:0;top:0;opacity:.6;}
+  100%{width:20px;height:20px;left:-16px;top:-6px;opacity:0;}
+}
+.ep2{animation-delay:.1s;}
+.ep3{animation-delay:.2s;}
+/* Wheels */
+.car-wheels {
+  position:absolute;
+  bottom:-10px; left:0; right:0;
+}
+.car-wheel {
+  position:absolute;
+  width:20px; height:20px;
+  background:radial-gradient(circle,#666,#222);
+  border-radius:50%;
+  border:3px solid #111;
+  animation:wheelSpin .2s linear infinite;
+}
+.car-wheel::before {
+  content:''; position:absolute;
+  width:8px; height:2px;
+  background:#555;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+}
+.car-wheel::after {
+  content:''; position:absolute;
+  width:2px; height:8px;
+  background:#555;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+}
+@keyframes wheelSpin { to{transform:rotate(360deg);} }
+.cw-front { right:8px; bottom:0; }
+.cw-rear  { left:8px; bottom:0; }
+/* Tire marks */
+.tire-mark {
+  position:absolute;
+  bottom:38.5%; left:0; right:0;
+  height:2px;
+  background:rgba(50,50,50,.8);
+  animation:tireMark .4s linear infinite;
+}
+@keyframes tireMark { from{background-position:0 0;} to{background-position:-80px 0;} }
+/* Motion blur lines on car */
+.car-blur {
+  position:absolute;
+  top:2px; left:-40px; right:50%;
+  height:18px;
+  background:linear-gradient(90deg,transparent,rgba(220,38,38,.15));
+  pointer-events:none;
+}
+/* Headlights */
+.car-headlight {
+  position:absolute;
+  top:8px; right:-2px;
+  width:6px; height:5px;
+  background:#fef9c3;
+  border-radius:2px;
+  box-shadow:0 0 15px #fef08a, 20px 0 30px rgba(254,249,195,.3);
+}
+/* Crowd silhouette */
+.car-crowd {
+  position:absolute;
+  bottom:38%; left:0; right:0;
+  height:40px;
+  background:repeating-linear-gradient(90deg,
+    #111 0px,#111 8px,#0a0a12 8px,#0a0a12 16px);
+  display:flex;
+  align-items:flex-end;
+}
+.crowd-head {
+  width:8px; height:12px;
+  background:#1a1a2e;
+  border-radius:50% 50% 0 0;
+  flex-shrink:0;
+  border-top:2px solid rgba(255,255,255,.1);
+}
+
+/* ======================================================
+   SCENE 6 — BICYCLE
+   ====================================================== */
+.bike-scene {
+  background:linear-gradient(180deg,#fde68a 0%,#fbbf24 30%,#f59e0b 55%,#d97706 55%,#78350f 100%);
+}
+.bike-scene .scene-title { color:#1c1917; }
+
+/* Road & markings */
+.bike-road {
+  position:absolute;
+  bottom:0; left:0; right:0; height:55%;
+  background:linear-gradient(180deg,#d97706,#78350f);
+}
+.bike-road-line {
+  position:absolute;
+  top:20%; left:0; right:0;
+  height:3px;
+  background:repeating-linear-gradient(90deg,
+    rgba(255,255,255,.35) 0,rgba(255,255,255,.35) 30px,
+    transparent 30px, transparent 60px);
+  animation:bikeLineScroll 0.5s linear infinite;
+}
+@keyframes bikeLineScroll { to{background-position:-60px 0;} }
+/* Shadow */
+.bike-shadow {
+  position:absolute;
+  bottom:46%;
+  left:42%;
+  width:100px; height:6px;
+  background:rgba(0,0,0,.25);
+  border-radius:50%;
+  animation:bikeShadow .5s ease-in-out infinite alternate;
+}
+@keyframes bikeShadow { 0%{transform:scaleX(.9);opacity:.2;} 100%{transform:scaleX(1.05);opacity:.3;} }
+
+/* Bicycle */
+.bicycle {
+  position:absolute;
+  bottom:46%;
+  left:38%;
+  animation:bikeBounce .5s ease-in-out infinite alternate;
+}
+@keyframes bikeBounce { 0%{transform:translateY(0) rotate(-.5deg);} 100%{transform:translateY(-3px) rotate(.5deg);} }
+
+/* Wheels */
+.bike-wheel {
+  position:absolute;
+  width:52px; height:52px;
+  border:4px solid #1c1917;
+  border-radius:50%;
+  animation:bikeWheelSpin .4s linear infinite;
+}
+@keyframes bikeWheelSpin { to{transform:rotate(360deg);} }
+.bike-wheel::before,.bike-wheel::after {
+  content:''; position:absolute;
+  background:#1c1917;
+  border-radius:1px;
+  top:50%; left:50%;
+}
+.bike-wheel::before { width:2px; height:44px; transform:translate(-50%,-50%); }
+.bike-wheel::after  { width:44px; height:2px; transform:translate(-50%,-50%); }
+.bw-front { right:-2px; bottom:0; }
+.bw-rear  { left:-2px; bottom:0; }
+
+/* Frame */
+.bike-frame {
+  position:absolute;
+  bottom:10px; left:10px;
+  width:80px; height:45px;
+}
+/* SVG-less frame using divs */
+.frame-toptube {
+  position:absolute;
+  bottom:30px; left:14px;
+  width:45px; height:4px;
+  background:#e11d48;
+  transform:rotate(-10deg);
+  border-radius:2px;
+}
+.frame-downtube {
+  position:absolute;
+  bottom:4px; left:14px;
+  width:42px; height:4px;
+  background:#be123c;
+  transform:rotate(20deg);
+  border-radius:2px;
+  transform-origin:left bottom;
+}
+.frame-seattube {
+  position:absolute;
+  bottom:4px; left:30px;
+  width:4px; height:28px;
+  background:#e11d48;
+  border-radius:2px;
+}
+.frame-chainstay {
+  position:absolute;
+  bottom:4px; left:8px;
+  width:26px; height:3px;
+  background:#9f1239;
+  border-radius:2px;
+}
+.frame-seatstay {
+  position:absolute;
+  bottom:10px; left:10px;
+  width:26px; height:3px;
+  background:#9f1239;
+  transform:rotate(18deg);
+  transform-origin:right bottom;
+  border-radius:2px;
+}
+/* Fork */
+.bike-fork {
+  position:absolute;
+  bottom:4px; right:4px;
+  width:3px; height:26px;
+  background:#1c1917;
+  border-radius:2px;
+  transform:rotate(5deg);
+}
+/* Handlebar */
+.bike-handlebar {
+  position:absolute;
+  bottom:38px; right:2px;
+  width:3px; height:14px;
+  background:#1c1917;
+  border-radius:2px;
+}
+.handlebar-top {
+  position:absolute;
+  top:0; left:-5px;
+  width:12px; height:3px;
+  background:#1c1917;
+  border-radius:2px;
+}
+/* Seat */
+.bike-seat {
+  position:absolute;
+  bottom:38px; left:24px;
+  width:18px; height:4px;
+  background:#1c1917;
+  border-radius:3px;
+}
+/* Pedal */
+.bike-pedal {
+  position:absolute;
+  bottom:16px; left:30px;
+  width:6px; height:6px;
+  border:2px solid #1c1917;
+  border-radius:50%;
+  animation:pedalSpin .4s linear infinite;
+}
+@keyframes pedalSpin { to{transform:rotate(360deg);} }
+.pedal-arm {
+  position:absolute;
+  width:10px; height:2px;
+  background:#1c1917;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  border-radius:1px;
+}
+.pedal-foot {
+  position:absolute;
+  right:-6px; top:50%;
+  width:8px; height:3px;
+  background:#555;
+  border-radius:1px;
+  transform:translateY(-50%);
+}
+
+/* Rider */
+.bike-rider {
+  position:absolute;
+  bottom:50px; left:24px;
+}
+.br-torso {
+  width:12px; height:18px;
+  background:linear-gradient(180deg,#16a34a,#15803d);
+  border-radius:3px;
+  transform:rotate(-20deg);
+  transform-origin:bottom center;
+}
+.br-head {
+  width:14px; height:14px;
+  background:radial-gradient(circle at 40% 35%,#FDBCB4,#e8967a);
+  border-radius:50%;
+  position:absolute;
+  top:-16px; left:-2px;
+}
+.br-helmet {
+  position:absolute;
+  top:0px; left:0px;
+  width:14px; height:9px;
+  background:#dc2626;
+  border-radius:50% 50% 0 0;
+}
+.br-arm {
+  position:absolute;
+  width:5px; height:14px;
+  background:#16a34a;
+  border-radius:2px;
+  top:4px; right:-3px;
+  transform:rotate(35deg);
+  transform-origin:top center;
+}
+.br-legs {
+  position:absolute;
+  bottom:-14px; left:0;
+}
+.br-leg {
+  width:5px; height:14px;
+  background:#1e40af;
+  border-radius:2px;
+  position:absolute;
+  transform-origin:top center;
+}
+.br-leg.left  { left:0; animation:brLegL .4s ease-in-out infinite alternate; }
+.br-leg.right { left:5px; animation:brLegR .4s ease-in-out infinite alternate; }
+@keyframes brLegL { 0%{transform:rotate(-25deg);} 100%{transform:rotate(25deg);} }
+@keyframes brLegR { 0%{transform:rotate(25deg);} 100%{transform:rotate(-25deg);} }
+
+/* Scrolling scenery */
+.bike-tree {
+  position:absolute;
+  bottom:53%;
+  animation:bikeTreeScroll linear infinite;
+}
+@keyframes bikeTreeScroll { from{right:-50px;} to{right:110%;} }
+.bt-trunk { width:6px; height:22px; background:#5a3e2b; margin:0 auto; }
+.bt-top {
+  width:0; height:0;
+  border-left:16px solid transparent;
+  border-right:16px solid transparent;
+  border-bottom:28px solid #2d5016;
+  margin:0 auto;
+}
+
+/* ======================================================
+   SCENE 7 — SKATEBOARD
+   ====================================================== */
+.skate-scene {
+  background:linear-gradient(160deg,#1e1b4b 0%,#312e81 40%,#4338ca 100%);
+}
+.skate-scene .scene-title { color:#a5b4fc; text-shadow:0 0 15px #6366f1; }
+
+/* Floor */
+.skate-floor {
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:32%;
+  background:linear-gradient(180deg,#1e1b4b,#0f0e26);
+  border-top:3px solid rgba(99,102,241,.4);
+}
+/* Floor tiles */
+.skate-tiles {
+  position:absolute;
+  top:0; left:0; right:0;
+  height:100%;
+  background:repeating-linear-gradient(90deg,
+    rgba(99,102,241,.08) 0, rgba(99,102,241,.08) 1px,
+    transparent 1px, transparent 60px);
+  animation:tilescroll .6s linear infinite;
+}
+@keyframes tilescroll { to{background-position:-60px 0;} }
+
+/* Neon grid lines receding perspective */
+.skate-grid-h {
+  position:absolute;
+  top:0; left:0; right:0;
+  height:100%;
+  background:repeating-linear-gradient(180deg,
+    rgba(99,102,241,.12) 0, rgba(99,102,241,.12) 1px,
+    transparent 1px, transparent 20px);
+}
+
+/* Ramp */
+.skate-ramp {
+  position:absolute;
+  bottom:32%; right:10%;
+  width:80px; height:40px;
+  background:linear-gradient(135deg,#312e81,#1e1b4b);
+  border-radius:0 0 0 100%;
+  border-left:2px solid rgba(99,102,241,.5);
+  border-bottom:2px solid rgba(99,102,241,.3);
+}
+
+/* Graffiti wall */
+.skate-wall {
+  position:absolute;
+  bottom:32%; left:0; right:0;
+  height:68%;
+  background:linear-gradient(180deg,#1e1b4b 0%,#312e81 100%);
+}
+/* Wall lines for depth */
+.wall-line {
+  position:absolute;
+  left:0; right:0;
+  height:1px;
+  background:rgba(99,102,241,.1);
+}
+
+/* Stars */
+.sk-stars { position:absolute; inset:0 0 32% 0; }
+
+/* Skateboarder */
+.skater {
+  position:absolute;
+  bottom:32%;
+  left:35%;
+  animation:skaterMove 3s ease-in-out infinite;
+}
+@keyframes skaterMove {
+  0%  { transform:translateY(0) rotate(0); left:25%; }
+  20% { transform:translateY(-8px) rotate(-3deg); }
+  40% { transform:translateY(0) rotate(0); left:45%; }
+  50% { transform:translateY(-40px) rotate(10deg); left:52%; }/* jump */
+  65% { transform:translateY(0) rotate(0); left:55%; }
+  80% { transform:translateY(-5px) rotate(-2deg); }
+  100%{ transform:translateY(0) rotate(0); left:25%; }
+}
+
+/* Board */
+.sk-board {
+  position:absolute;
+  bottom:-6px; left:-5px;
+  width:52px; height:8px;
+  background:linear-gradient(180deg,#a5b4fc,#818cf8);
+  border-radius:3px 3px 2px 2px;
+}
+.sk-board::before,.sk-board::after {
+  content:''; position:absolute;
+  width:10px; height:5px;
+  background:#1e1b4b;
+  border-radius:50%;
+  bottom:-3px;
+}
+.sk-board::before { left:6px; }
+.sk-board::after  { right:6px; }
+/* Truck wheels */
+.sk-wheel {
+  position:absolute;
+  width:8px; height:8px;
+  background:radial-gradient(circle,#888,#333);
+  border-radius:50%;
+  bottom:-5px;
+  animation:skWheelSpin .3s linear infinite;
+}
+@keyframes skWheelSpin { to{transform:rotate(360deg);} }
+.skw1 { left:8px; }
+.skw2 { right:8px; }
+
+/* Skater body */
+.sk-body {
+  position:relative;
+  width:24px;
+  margin:0 auto;
+}
+.sk-head {
+  width:14px; height:14px;
+  background:radial-gradient(circle at 40% 35%,#FDBCB4,#e8967a);
+  border-radius:50%;
+  margin:0 auto;
+  position:relative;
+}
+.sk-cap {
+  position:absolute;
+  top:-4px; left:-1px;
+  width:16px; height:8px;
+  background:#4338ca;
+  border-radius:50% 50% 0 0;
+}
+.sk-cap-brim {
+  position:absolute;
+  top:5px; left:-4px;
+  width:24px; height:4px;
+  background:#3730a3;
+  border-radius:2px;
+}
+.sk-torso {
+  width:14px; height:18px;
+  background:linear-gradient(180deg,#e11d48,#9f1239);
+  border-radius:3px;
+  margin:0 auto;
+  position:relative;
+}
+.sk-arm {
+  position:absolute;
+  width:5px; height:12px;
+  background:#e11d48;
+  border-radius:2px;
+  top:2px;
+  transform-origin:top center;
+  animation:skArmSwing .8s ease-in-out infinite alternate;
+}
+.sk-arm.left  { left:-4px; }
+.sk-arm.right { right:-4px; animation-delay:.4s; }
+@keyframes skArmSwing { 0%{transform:rotate(-20deg);} 100%{transform:rotate(20deg);} }
+.sk-legs { display:flex; justify-content:center; gap:2px; }
+.sk-leg {
+  width:6px; height:16px;
+  background:#1e1b4b;
+  border-radius:2px;
+  position:relative;
+  transform-origin:top center;
+  animation:skaterMove 3s ease-in-out infinite;
+}
+.sk-leg.left  { animation:skLegL 3s ease-in-out infinite; }
+.sk-leg.right { animation:skLegR 3s ease-in-out infinite; }
+@keyframes skLegL { 0%,40%,100%{transform:rotate(-10deg);} 50%{transform:rotate(-30deg);} 65%{transform:rotate(-10deg);} }
+@keyframes skLegR { 0%,40%,100%{transform:rotate(10deg);} 50%{transform:rotate(30deg);} 65%{transform:rotate(10deg);} }
+.sk-shoe {
+  position:absolute;
+  bottom:-3px; left:-1px;
+  width:9px; height:5px;
+  background:#111;
+  border-radius:0 3px 3px 1px;
+}
+
+/* Trick trail */
+.trick-trail {
+  position:absolute;
+  bottom:35%; left:40%;
+  pointer-events:none;
+}
+.trail-spark {
+  position:absolute;
+  width:4px; height:4px;
+  border-radius:50%;
+  animation:sparkFly ease-out infinite;
+}
+@keyframes sparkFly {
+  0%  {transform:translate(0,0) scale(1); opacity:.8;}
+  100%{transform:var(--spark-end) scale(0); opacity:0;}
+}
+
+/* Neon glow floor line */
+.neon-line {
+  position:absolute;
+  bottom:32%; left:0; right:0;
+  height:2px;
+  background:linear-gradient(90deg, transparent, #818cf8, #6366f1, #818cf8, transparent);
+  box-shadow:0 0 10px #6366f1, 0 0 20px #4f46e5;
+  animation:neonPulse 2s ease-in-out infinite alternate;
+}
+@keyframes neonPulse { 0%{opacity:.6;} 100%{opacity:1;} }
+
+/* =============================================
+   SHARED UTILITIES
+   ============================================= */
+.ground-shadow {
+  position:absolute;
+  border-radius:50%;
+  background:rgba(0,0,0,.3);
+  animation:shadowPulse .5s ease-in-out infinite alternate;
+}
+@keyframes shadowPulse { 0%{transform:scaleX(.9);opacity:.2;} 100%{transform:scaleX(1.1);opacity:.35;} }
+
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<div class="nav">
+  <div class="tab active" style="--accent:#7c3aed" onclick="showScene(0,this)">🐉 Dragon</div>
+  <div class="tab" style="--accent:#16a34a" onclick="showScene(1,this)">🚶 Walking</div>
+  <div class="tab" style="--accent:#0891b2" onclick="showScene(2,this)">🌊 Ocean</div>
+  <div class="tab" style="--accent:#f59e0b" onclick="showScene(3,this)">🌅 Day/Night</div>
+  <div class="tab" style="--accent:#ea580c" onclick="showScene(4,this)">🏎️ Racing Car</div>
+  <div class="tab" style="--accent:#dc2626" onclick="showScene(5,this)">🚴 Bicycle</div>
+  <div class="tab" style="--accent:#6366f1" onclick="showScene(6,this)">🛹 Skateboard</div>
+</div>
+
+<!-- ===== SCENE 1: DRAGON ===== -->
+<div class="scene-wrap active" id="wrap0">
+<div class="scene dragon-scene">
+  <div class="d-stars" id="dStars"></div>
+  <div class="d-moon"></div>
+  <div class="d-cloud" style="top:20%;height:14px;width:80px;animation-duration:22s;animation-delay:-5s;"></div>
+  <div class="d-cloud" style="top:35%;height:10px;width:55px;animation-duration:30s;animation-delay:-15s;"></div>
+  <div class="d-cloud" style="top:12%;height:18px;width:100px;animation-duration:18s;"></div>
+  <div class="dragon">
+    <div class="dragon-body">
+      <div class="dragon-wing left"><div class="wing-shape"></div></div>
+      <div class="dragon-wing right"><div class="wing-shape r"></div></div>
+      <div class="dragon-head">
+        <div class="dragon-horn"></div>
+        <div class="dragon-eye"></div>
+        <div class="dragon-nostril"></div>
+        <div class="dragon-fire">
+          <div class="fire-main"><div class="fire-top"></div></div>
+        </div>
+      </div>
+      <div class="dragon-tail"><div class="tail-tip"></div></div>
+    </div>
+  </div>
+  <div class="d-hills">
+    <div class="d-hill dh1"></div>
+    <div class="d-hill dh2"></div>
+    <div class="d-hill dh3"></div>
+  </div>
+  <div class="scene-title">🐉 Dragon Flying</div>
+</div>
+</div>
+
+<!-- ===== SCENE 2: WALKING ===== -->
+<div class="scene-wrap" id="wrap1">
+<div class="scene walk-scene">
+  <!-- Sun -->
+  <div class="w-sun" id="wSun">
+    <div class="w-sun-ray" style="transform:translate(-50%,-50%) rotate(0deg) translate(0,-26px)"></div>
+    <div class="w-sun-ray" style="transform:translate(-50%,-50%) rotate(45deg) translate(0,-26px)"></div>
+    <div class="w-sun-ray" style="transform:translate(-50%,-50%) rotate(90deg) translate(0,-26px)"></div>
+    <div class="w-sun-ray" style="transform:translate(-50%,-50%) rotate(135deg) translate(0,-26px)"></div>
+    <div class="w-sun-ray" style="transform:translate(-50%,-50%) rotate(180deg) translate(0,-26px)"></div>
+    <div class="w-sun-ray" style="transform:translate(-50%,-50%) rotate(225deg) translate(0,-26px)"></div>
+    <div class="w-sun-ray" style="transform:translate(-50%,-50%) rotate(270deg) translate(0,-26px)"></div>
+    <div class="w-sun-ray" style="transform:translate(-50%,-50%) rotate(315deg) translate(0,-26px)"></div>
+  </div>
+  <!-- Clouds -->
+  <div class="wc wc1"><div class="wc-body"></div></div>
+  <div class="wc wc2"><div class="wc-body"></div></div>
+  <!-- Scrolling trees -->
+  <div class="w-tree" style="animation-duration:3s;animation-delay:0s;">
+    <div class="wt-top2"></div><div class="wt-top"></div><div class="wt-trunk"></div>
+  </div>
+  <div class="w-tree" style="animation-duration:4s;animation-delay:-1.5s;">
+    <div class="wt-top2"></div><div class="wt-top"></div><div class="wt-trunk"></div>
+  </div>
+  <div class="w-tree" style="animation-duration:3.5s;animation-delay:-3s;">
+    <div class="wt-top2"></div><div class="wt-top"></div><div class="wt-trunk"></div>
+  </div>
+  <!-- Road -->
+  <div class="walk-road">
+    <div class="walk-lane"></div>
+  </div>
+  <!-- Person -->
+  <div class="person">
+    <div class="p-head"><div class="p-hair"></div></div>
+    <div class="p-body">
+      <div class="p-arm left"><div class="p-hand"></div></div>
+      <div class="p-arm right"><div class="p-hand"></div></div>
+    </div>
+    <div class="p-legs">
+      <div class="p-leg left"><div class="p-shoe"></div></div>
+      <div class="p-leg right"><div class="p-shoe"></div></div>
+    </div>
+  </div>
+  <div class="scene-title">🚶 Walking Person</div>
+</div>
+</div>
+
+<!-- ===== SCENE 3: OCEAN ===== -->
+<div class="scene-wrap" id="wrap2">
+<div class="scene ocean-scene" id="oceanScene">
+  <div class="o-moon"></div>
+  <!-- seagulls -->
+  <div class="seagull" style="top:12%;animation-duration:8s;animation-delay:0s;bottom:auto;">
+    <div class="sg-wing"></div><div class="sg-wing r"></div>
+  </div>
+  <div class="seagull" style="top:20%;animation-duration:11s;animation-delay:-4s;bottom:auto;">
+    <div class="sg-wing"></div><div class="sg-wing r"></div>
+  </div>
+  <div class="seagull" style="top:8%;animation-duration:14s;animation-delay:-9s;bottom:auto;">
+    <div class="sg-wing"></div><div class="sg-wing r"></div>
+  </div>
+  <!-- Boat -->
+  <div class="o-boat">
+    <div class="boat-mast"><div class="boat-flag"></div></div>
+    <div class="boat-hull"><div class="boat-sail"></div></div>
+  </div>
+  <!-- Waves -->
+  <div id="waveContainer"></div>
+  <!-- Bubbles -->
+  <div id="bubbleContainer"></div>
+  <div class="scene-title">🌊 Ocean Waves</div>
+</div>
+</div>
+
+<!-- ===== SCENE 4: DAY/NIGHT ===== -->
+<div class="scene-wrap" id="wrap3">
+<div class="scene daynight-scene">
+  <div class="dn-sky"></div>
+  <div class="dn-stars" id="dnStars"></div>
+  <div class="dn-sun"></div>
+  <div class="dn-sun-rays" id="dnSunRays"></div>
+  <div class="dn-moon"></div>
+  <div class="dn-ground">
+    <div class="dn-hill dnh1"></div>
+    <div class="dn-hill dnh2"></div>
+    <div class="dn-hill dnh3"></div>
+  </div>
+  <!-- Buildings -->
+  <div class="dn-buildings" id="dnBuildings"></div>
+  <!-- Time display -->
+  <div class="time-label" id="timeLabel">🌙 12:00 AM</div>
+  <div class="scene-title">🌅 Day / Night Cycle</div>
+</div>
+</div>
+
+<!-- ===== SCENE 5: RACING CAR ===== -->
+<div class="scene-wrap" id="wrap4">
+<div class="scene car-scene">
+  <div class="speed-lines" id="speedLines"></div>
+  <div class="car-crowd" id="carCrowd"></div>
+  <div class="car-track">
+    <div class="car-track-marks"></div>
+  </div>
+  <div class="car-track-line"></div>
+  <div class="tire-mark"></div>
+  <div class="rcar">
+    <div class="car-body">
+      <div class="car-chassis">
+        <div class="car-cockpit"><div class="car-windshield"></div></div>
+        <div class="car-spoiler"></div>
+        <div class="car-number">#7</div>
+        <div class="car-headlight"></div>
+        <div class="car-blur"></div>
+        <div class="car-exhaust">
+          <div class="exhaust-puff ep1"></div>
+          <div class="exhaust-puff ep2"></div>
+          <div class="exhaust-puff ep3"></div>
+        </div>
+      </div>
+      <div class="car-wheels">
+        <div class="car-wheel cw-front"></div>
+        <div class="car-wheel cw-rear"></div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-title">🏎️ Racing Car</div>
+</div>
+</div>
+
+<!-- ===== SCENE 6: BICYCLE ===== -->
+<div class="scene-wrap" id="wrap5">
+<div class="scene bike-scene">
+  <div class="bike-road"><div class="bike-road-line"></div></div>
+  <!-- Scrolling trees -->
+  <div class="bike-tree" style="animation-duration:2.5s;animation-delay:0s;">
+    <div class="bt-top"></div><div class="bt-trunk"></div>
+  </div>
+  <div class="bike-tree" style="animation-duration:3s;animation-delay:-1s;">
+    <div class="bt-top"></div><div class="bt-trunk"></div>
+  </div>
+  <div class="bike-tree" style="animation-duration:2s;animation-delay:-2s;">
+    <div class="bt-top"></div><div class="bt-trunk"></div>
+  </div>
+  <div class="bike-shadow"></div>
+  <div class="bicycle">
+    <!-- Wheels -->
+    <div class="bike-wheel bw-rear"></div>
+    <div class="bike-wheel bw-front"></div>
+    <!-- Frame -->
+    <div class="bike-frame">
+      <div class="frame-chainstay"></div>
+      <div class="frame-seatstay"></div>
+      <div class="frame-seattube"></div>
+      <div class="frame-toptube"></div>
+      <div class="frame-downtube"></div>
+      <div class="bike-seat"></div>
+      <div class="bike-fork"></div>
+      <div class="bike-handlebar"><div class="handlebar-top"></div></div>
+      <div class="bike-pedal">
+        <div class="pedal-arm"><div class="pedal-foot"></div></div>
+      </div>
+    </div>
+    <!-- Rider -->
+    <div class="bike-rider">
+      <div class="br-head"><div class="br-helmet"></div></div>
+      <div class="br-torso">
+        <div class="br-arm"></div>
+      </div>
+      <div class="br-legs">
+        <div class="br-leg left"></div>
+        <div class="br-leg right"></div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-title">🚴 Riding Bicycle</div>
+</div>
+</div>
+
+<!-- ===== SCENE 7: SKATEBOARD ===== -->
+<div class="scene-wrap" id="wrap6">
+<div class="scene skate-scene">
+  <div class="skate-wall"></div>
+  <div class="sk-stars" id="skStars"></div>
+  <div class="skate-ramp"></div>
+  <div class="skate-floor">
+    <div class="skate-tiles"></div>
+    <div class="skate-grid-h"></div>
+  </div>
+  <div class="neon-line"></div>
+  <div class="skater">
+    <div class="sk-body">
+      <div class="sk-head"><div class="sk-cap"><div class="sk-cap-brim"></div></div></div>
+      <div class="sk-torso">
+        <div class="sk-arm left"></div>
+        <div class="sk-arm right"></div>
+      </div>
+      <div class="sk-legs">
+        <div class="sk-leg left"><div class="sk-shoe"></div></div>
+        <div class="sk-leg right"><div class="sk-shoe"></div></div>
+      </div>
+    </div>
+    <div class="sk-board">
+      <div class="sk-wheel skw1"></div>
+      <div class="sk-wheel skw2"></div>
+    </div>
+  </div>
+  <div class="trick-trail" id="trickTrail"></div>
+  <div class="scene-title">🛹 Riding Skateboard</div>
+</div>
+</div>
+
+<script>
+// ===== TAB SWITCHING =====
+function showScene(idx, el) {
+  document.querySelectorAll('.scene-wrap').forEach((w,i) => {
+    w.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    t.classList.toggle('active', t === el);
+  });
+}
+
+// ===== SCENE 1: Dragon stars =====
+const dStar = document.getElementById('dStars');
+for(let i=0;i<70;i++){
+  const s=document.createElement('div');
+  s.className='d-star';
+  const sz=Math.random()*2+.5;
+  s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*70}%;
+    width:${sz}px;height:${sz}px;
+    animation-duration:${1.5+Math.random()*3}s;
+    animation-delay:${Math.random()*3}s;`;
+  dStar.appendChild(s);
+}
+
+// ===== SCENE 3: Ocean waves =====
+(function buildOcean(){
+  const wc = document.getElementById('waveContainer');
+  const colors = [
+    'rgba(0,100,200,.7)',
+    'rgba(0,80,180,.8)',
+    'rgba(0,60,160,.85)',
+    'rgba(0,40,130,.9)',
+  ];
+  const tops = [28, 42, 54, 65]; // % from top
+  const heights = [50, 45, 40, 35];
+  const speeds = [3, 4, 5, 6];
+
+  tops.forEach((t,i)=>{
+    const div=document.createElement('div');
+    div.className='wave-layer';
+    div.style.cssText=`top:${t}%;height:${heights[i]}%;animation-duration:${speeds[i]}s;`;
+    div.innerHTML=`<svg class="wave-svg" viewBox="0 0 1440 60" preserveAspectRatio="none">
+      <path d="M0,30 C120,0 240,60 360,30 C480,0 600,60 720,30 C840,0 960,60 1080,30 C1200,0 1320,60 1440,30 L1440,60 L0,60 Z"
+        fill="${colors[i]}"/>
+      <path d="M0,30 C120,0 240,60 360,30 C480,0 600,60 720,30 C840,0 960,60 1080,30 C1200,0 1320,60 1440,30 L1440,60 L0,60 Z"
+        fill="${colors[i]}" transform="translate(720,0)"/>
+    </svg>`;
+    wc.appendChild(div);
+  });
+
+  // Bubbles
+  const bc = document.getElementById('bubbleContainer');
+  for(let i=0;i<20;i++){
+    const b=document.createElement('div');
+    b.className='bubble';
+    const sz=4+Math.random()*10;
+    b.style.cssText=`
+      left:${Math.random()*100}%;
+      bottom:${Math.random()*20}%;
+      width:${sz}px;height:${sz}px;
+      animation-duration:${3+Math.random()*4}s;
+      animation-delay:${Math.random()*4}s;`;
+    bc.appendChild(b);
+  }
+})();
+
+// ===== SCENE 4: Day/Night =====
+// Stars
+const dnStars = document.getElementById('dnStars');
+for(let i=0;i<60;i++){
+  const s=document.createElement('div');
+  s.className='d-star';
+  s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*60}%;
+    width:${Math.random()*2+.5}px;height:${Math.random()*2+.5}px;
+    background:white;border-radius:50%;position:absolute;
+    animation:dStarTwinkle ${1+Math.random()*3}s ease-in-out infinite alternate;
+    animation-delay:${Math.random()*4}s;`;
+  dnStars.appendChild(s);
+}
+
+// Sun rays
+const dnRays = document.getElementById('dnSunRays');
+for(let i=0;i<12;i++){
+  const r=document.createElement('div');
+  r.className='dn-ray';
+  r.style.transform=`translate(-50%,-50%) rotate(${i*30}deg) translateY(-34px)`;
+  dnRays.appendChild(r);
+}
+
+// Buildings
+const dnBldg = document.getElementById('dnBuildings');
+const bldgData = [
+  {w:30,h:100},{w:24,h:75},{w:36,h:120},{w:20,h:60},{w:28,h:90},
+  {w:22,h:50},{w:32,h:105},{w:26,h:80},{w:18,h:55},{w:30,h:95},
+  {w:24,h:70},{w:38,h:115},
+];
+bldgData.forEach(bd=>{
+  const b=document.createElement('div');
+  b.className='dn-bldg';
+  b.style.cssText=`width:${bd.w}px;height:${bd.h}px;`;
+  // Add windows
+  const rows=Math.floor(bd.h/14);
+  const cols=Math.floor(bd.w/10);
+  for(let r=0;r<rows;r++){
+    for(let c=0;c<cols;c++){
+      const w=document.createElement('div');
+      w.className='dn-bldg-window';
+      b.appendChild(w);
+    }
+  }
+  dnBldg.appendChild(b);
+});
+
+// Animated time label
+const timeLabel = document.getElementById('timeLabel');
+const timeMap = [
+  [0, '🌙 12:00 AM'], [12.5,'🌄 4:30 AM'],
+  [25,'🌅 6:00 AM'], [40,'☀️ 9:00 AM'],
+  [55,'☀️ 12:00 PM'],[67,'🌆 6:00 PM'],
+  [83,'🌃 9:00 PM'], [100,'🌙 12:00 AM'],
+];
+function updateTime(){
+  const duration=12000;
+  const t=(Date.now()%duration)/duration*100;
+  let label=timeMap[0][1];
+  for(let i=timeMap.length-1;i>=0;i--){
+    if(t>=timeMap[i][0]){ label=timeMap[i][1]; break; }
+  }
+  timeLabel.textContent=label;
+}
+setInterval(updateTime,500);
+
+// ===== SCENE 5: Speed lines =====
+const slContainer = document.getElementById('speedLines');
+for(let i=0;i<18;i++){
+  const l=document.createElement('div');
+  l.className='speed-line';
+  l.style.cssText=`
+    top:${5+Math.random()*90}%;
+    animation-duration:${0.3+Math.random()*.5}s;
+    animation-delay:${Math.random()*.5}s;
+    opacity:${0.05+Math.random()*.15};`;
+  slContainer.appendChild(l);
+}
+
+// ===== SCENE 5: Crowd =====
+const crowd = document.getElementById('carCrowd');
+for(let i=0;i<50;i++){
+  const h=document.createElement('div');
+  h.className='crowd-head';
+  h.style.height=(8+Math.random()*8)+'px';
+  crowd.appendChild(h);
+}
+
+// ===== SCENE 7: Skateboard stars =====
+const skStars = document.getElementById('skStars');
+for(let i=0;i<50;i++){
+  const s=document.createElement('div');
+  s.className='d-star';
+  const sz=Math.random()*2+.5;
+  s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*90}%;
+    width:${sz}px;height:${sz}px;
+    background:rgba(165,180,252,.8);border-radius:50%;position:absolute;
+    animation:dStarTwinkle ${1.5+Math.random()*3}s ease-in-out infinite alternate;
+    animation-delay:${Math.random()*3}s;`;
+  skStars.appendChild(s);
+}
+
+// ===== Trick sparks for skater =====
+const trickTrail = document.getElementById('trickTrail');
+const sparkColors=['#a5b4fc','#818cf8','#c4b5fd','#67e8f9','#fbbf24'];
+for(let i=0;i<12;i++){
+  const sp=document.createElement('div');
+  sp.className='trail-spark';
+  const dx=(Math.random()-.5)*60;
+  const dy=-20-Math.random()*40;
+  sp.style.cssText=`
+    background:${sparkColors[i%sparkColors.length]};
+    box-shadow:0 0 6px ${sparkColors[i%sparkColors.length]};
+    --spark-end:translate(${dx}px,${dy}px);
+    animation-duration:${.6+Math.random()*.8}s;
+    animation-delay:${Math.random()*3}s;
+    left:${Math.random()*30}px;
+    top:${Math.random()*10}px;`;
+  trickTrail.appendChild(sp);
+}
+
+// Walking: sun ray animation
+const wSun = document.getElementById('wSun');
+let sunAngle = 0;
+setInterval(()=>{
+  sunAngle++;
+  wSun.style.transform = `rotate(${sunAngle}deg)`;
+},50);
+</script>
+</body>
+</html>
